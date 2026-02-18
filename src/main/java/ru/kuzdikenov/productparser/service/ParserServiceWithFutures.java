@@ -18,7 +18,7 @@ public class ParserServiceWithFutures extends ParserService {
     @Override
     public List<ParseResult> parseProducts(List<Product> products) {
         List<Future<ParseResult>> futures = new ArrayList<>();
-        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+        try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
             for (Product product: products) {
                 futures.add(executorService.submit(new ParseTask(parser, product)));
             }

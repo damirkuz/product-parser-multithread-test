@@ -4,20 +4,20 @@ import ru.kuzdikenov.productparser.model.ParseResult;
 import ru.kuzdikenov.productparser.model.Product;
 import ru.kuzdikenov.productparser.parser.FakeParser;
 import ru.kuzdikenov.productparser.service.ParserService;
-import ru.kuzdikenov.productparser.service.ParserServiceWithFutures;
+import ru.kuzdikenov.productparser.service.ParserServiceWithCompletableFutures;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     static void main() {
-        ParserService parserService = new ParserServiceWithFutures(new FakeParser());
+        ParserService parserService = new ParserServiceWithCompletableFutures(new FakeParser());
 
         List<Product> products = new ArrayList<>();
 
-        products.add(new Product("123"));
-        products.add(new Product("123"));
-        products.add(new Product("123"));
+        for (int i = 0; i < 100; i++) {
+            products.add(new Product("123"));
+        }
 
         long before = System.currentTimeMillis();
         List<ParseResult> results = parserService.parseProducts(products);

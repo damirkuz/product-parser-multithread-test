@@ -12,10 +12,10 @@ public class FakeParser implements Parser {
     @Override
     public ParseResult parse(Product product) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1000 + random.nextInt(1000, 3000));
         } catch (InterruptedException _) {}
 
-        return new ParseResult("name " + String.valueOf(random.nextInt(1000)),
+        return new ParseResult("name " + random.nextInt(1000),
                 random.nextInt(10000));
     }
 }
